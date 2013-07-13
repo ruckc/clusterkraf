@@ -35,8 +35,20 @@ public class ClusterPoint extends BasePoint {
 	void add(InputPoint point) {
 		pointsInClusterList.add(point);
 		pointsInClusterSet.add(point);
+		
+		mapPosition = getCenterLatLng();
 
 		boundsOfInputPoints = null;
+	}
+
+	private LatLng getCenterLatLng() {
+		LatLngBounds bounds = getBoundsOfInputPoints();
+		LatLng loc = new LatLng(avg(bounds.northeast.latitude,bounds.southwest.latitude),avg(bounds.northeast.longitude,bounds.southwest.longitude));
+		return loc;
+	}
+	
+	private double avg(double a, double b) {
+		return (a+b)/2;
 	}
 
 	ArrayList<InputPoint> getPointsInCluster() {
