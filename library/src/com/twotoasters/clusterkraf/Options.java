@@ -106,6 +106,13 @@ public class Options {
 	 * triggering cluster update processes.
 	 */
 	private long clusteringOnCameraChangeListenerDirtyLifetimeMillis = 200l;
+	
+	/**
+	 * controls location of the cluster marker.  If true, it is shown at the center 
+	 * of the clustered points bounding box.  If false, it is shown on the default
+	 * location (which is a marker's location).
+	 */
+	private boolean showClusterOnCentroid = false;
 
 	/**
 	 * 
@@ -336,6 +343,14 @@ public class Options {
 	 */
 	public void setClusteringOnCameraChangeListenerDirtyLifetimeMillis(long clusteringOnCameraChangeListenerDirtyLifetimeMillis) {
 		this.clusteringOnCameraChangeListenerDirtyLifetimeMillis = clusteringOnCameraChangeListenerDirtyLifetimeMillis;
+	}
+	
+	public void setClusterShownAtCentroid(boolean showClusterOnCentroid) {
+		this.showClusterOnCentroid = showClusterOnCentroid;
+	}
+	
+	public boolean isClusterShownAtCentroid() {
+		return showClusterOnCentroid;
 	}
 
 	ProcessingListener getProcessingListener() {

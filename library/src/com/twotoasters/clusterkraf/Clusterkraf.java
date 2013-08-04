@@ -51,6 +51,7 @@ public class Clusterkraf {
 	public Clusterkraf(GoogleMap map, Options options, ArrayList<InputPoint> points) {
 		this.mapRef = new WeakReference<GoogleMap>(map);
 		this.options = options;
+		ClusterPoint.setOptions(options);
 		this.innerCallbackListener = new InnerCallbackListener(this);
 		this.transitionsAnimation = new ClusterTransitionsAnimation(map, options, innerCallbackListener);
 

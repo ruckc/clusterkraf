@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
  * due to pixel proximity
  */
 public class ClusterPoint extends BasePoint {
+	private static Options options;
 
 	private final ArrayList<InputPoint> pointsInClusterList = new ArrayList<InputPoint>();
 	private final HashSet<InputPoint> pointsInClusterSet = new HashSet<InputPoint>();
@@ -35,20 +36,22 @@ public class ClusterPoint extends BasePoint {
 	void add(InputPoint point) {
 		pointsInClusterList.add(point);
 		pointsInClusterSet.add(point);
-		
-		mapPosition = getCenterLatLng();
+
+		if (options.isClusterShownAtCentroid()) {
+			mapPosition = getCenterLatLng();
+		}
 
 		boundsOfInputPoints = null;
 	}
 
 	private LatLng getCenterLatLng() {
 		LatLngBounds bounds = getBoundsOfInputPoints();
-		LatLng loc = new LatLng(avg(bounds.northeast.latitude,bounds.southwest.latitude),avg(bounds.northeast.longitude,bounds.southwest.longitude));
+		LatLng loc = new LatLng(avg(bounds.northeast.latitude, bounds.southwest.latitude), avg(bounds.northeast.longitude, bounds.southwest.longitude));
 		return loc;
 	}
-	
+
 	private double avg(double a, double b) {
-		return (a+b)/2;
+		return (a + b) / 2;
 	}
 
 	ArrayList<InputPoint> getPointsInCluster() {
@@ -104,4 +107,7 @@ public class ClusterPoint extends BasePoint {
 		return boundsOfInputPoints;
 	}
 
+	public static void setOptions(Options options) {
+		ClusterPoint.options = options;
+	}
 }
